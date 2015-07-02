@@ -13,10 +13,11 @@ PlayerSay is a scaleform module for dota 2 custom games which allows for process
 
 ## Usage
 In order to listen for player chat, you need to register a handler function for Team chat, and another for All chat:
+
     PlayerSay:TeamChatHandler(function(playerEntity, text)
       print(playerEntity:GetPlayerID() .. " said '" .. text .. '" to their team.')
     end)
-
+    
     PlayerSay:AllChatHandler(function(playerEntity, text)
       print(playerEntity:GetPlayerID() .. " said '" .. text .. '" to all chat.')
     end)
@@ -24,13 +25,18 @@ In order to listen for player chat, you need to register a handler function for 
 You can use these handlers to parse the given text, or do whatever you like with it.
 
 By default, all clients are allowed to send chat messages on both Team/Ally chat and All chat.  To adjust this at any point in the game, call:
+
     PlayerSay:SendConfig(playerID, allowTeamChatBoolean, allowAllChatBoolean)
 e.g.
+
     PlayerSay:SendConfig(0, false, false)
+
 will prevent the player with ID 0 from sending any messages to both Team/Ally chat and All chat.  To turn back on all chat only, you could call:
+
     PlayerSay:SendConfig(0, false, true)
 
 Additionally, you can change the configuration of all clients at once using the following command:
+
     PlayerSay:SendConfigToAll(false, false)
 
 SendConfig and SendConfigToAll only disable the normal team/all chat behavior of sending messages to other players, but you can still work with the messages sent to the serve in the TeamChatHandler and AllChatHandler functions.
